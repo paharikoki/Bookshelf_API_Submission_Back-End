@@ -4,8 +4,8 @@ const {nanoid} = require("nanoid");
 const addBookHandler = (request, h) => {
     const { name, year, author, summary, publisher, pageCount, readPage, reading } = request.payload;
     const id = nanoid(16)
-    const createAt = new Date().toISOString();
-    const updatedAt = createAt;
+    const insertedAt = new Date().toISOString();
+    const updatedAt = insertedAt;
     const finished = pageCount === readPage;
     if (name === undefined){
         const response = h.response({
@@ -24,7 +24,7 @@ const addBookHandler = (request, h) => {
         return response;
     }
 
-    const newBook = { id,name, year, author, summary, publisher, pageCount, readPage,  reading, finished, createAt, updatedAt };
+    const newBook = { id,name, year, author, summary, publisher, pageCount, readPage,  reading, finished, insertedAt, updatedAt };
     books.push(newBook);
     const isSuccess = books.filter((book) => book.id === id).length > 0;
     if (isSuccess) {
